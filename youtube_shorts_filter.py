@@ -7,11 +7,14 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from dotenv import load_dotenv
 
-load_dotenv()
-API_KEY = os.getenv("YOUTUBE_API_KEY")
-if not API_KEY:
-    raise ValueError("Missing YouTube API key! Please check your .env file.")
+# load_dotenv()
+# API_KEY = os.getenv("YOUTUBE_API_KEY")
+# if not API_KEY:
+#     raise ValueError("Missing YouTube API key! Please check your .env file.")
 
+import streamlit as st
+
+API_KEY = st.secrets["API_KEY"]
 
 class YouTubeShortsProductFilter:
     def __init__(self, api_key, model_path="product_detection_model.pkl", vectorizer_path="tfidf_vectorizer.pkl"):

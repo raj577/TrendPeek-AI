@@ -53,7 +53,15 @@ Built with love for data-driven YouTube discovery 🚀
 
     # ------------------- Search Form -------------------
     st.header("⚙️ Search Settings")
-    query_input = st.text_area("Enter keywords (comma-separated):", value="gadgets for students, gadgets for productivity, cool stuff from amazon")
+    query_input = st.text_area("Enter keywords (comma-separated):",  value="amazon finds, must have products, kitchen hacks, cool gadgets, "
+          "viral amazon products, best amazon products, useful home items, "
+          # "amazon must haves, tech gadgets amazon, tiktok amazon products, "
+          # "cool stuff on amazon, unique amazon finds, amazon gift ideas, "
+          # "budget gadgets, amazon tools, affordable tech amazon, "
+          # "amazon electronics under 1000, amazon beauty products, "
+          # "home organization amazon, smart home gadgets, cheap amazon finds, "
+          # "mini gadgets amazon, best kitchen gadgets"
+    )
     max_results = st.slider("🔍 Max results per query", min_value=5, max_value=50, value=5)
     run_btn = st.button("🚀 Run Finder AI")
 
