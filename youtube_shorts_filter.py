@@ -4,6 +4,14 @@ import json
 import joblib
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
+from dotenv import load_dotenv
+import os
+
+load_dotenv()  # Load from .env file
+
+API_KEY = os.getenv("YOUTUBE_API_KEY")
+if not API_KEY:
+    raise ValueError("Missing YouTube API key! Please check your .env file.")
 
 
 class YouTubeShortsProductFilter:
@@ -226,7 +234,7 @@ class YouTubeShortsProductFilter:
 
 def main():
     # Note: You need to replace 'YOUR_API_KEY' with an actual YouTube Data API key
-    API_KEY = "AIzaSyDUlbs_7Vc1Jj1stkyLyZxvk8w6mE-MHng"
+    # API_KEY = "AIzaSyDUlbs_7Vc1Jj1stkyLyZxvk8w6mE-MHng"
 
     if API_KEY == "YOUR_API_KEY":
         print("Please set a valid YouTube Data API key in the API_KEY variable.")
