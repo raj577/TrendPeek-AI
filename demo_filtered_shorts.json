@@ -1,0 +1,39 @@
+[
+  {
+    "video_id": "demo1",
+    "title": "Unboxing the new iPhone 15 Pro Max! #shorts",
+    "description": "Check out my unboxing of the latest iPhone 15 Pro Max. Link in bio to buy now! Use code SAVE10 for discount.",
+    "url": "https://www.youtube.com/watch?v=demo1",
+    "regex_patterns": [
+      "iphone\\s*\\d+",
+      "buy\\s+now",
+      "link\\s+in\\s+bio",
+      "product\\s+review",
+      "unboxing",
+      "discount"
+    ],
+    "ml_detection": true
+  },
+  {
+    "video_id": "demo3",
+    "title": "Nike Air Jordan 1 Review #shorts",
+    "description": "Reviewing the classic Nike Air Jordan 1. Get yours at nike.com for $120!",
+    "url": "https://www.youtube.com/watch?v=demo3",
+    "regex_patterns": [
+      "nike",
+      "amazon\\.com",
+      "(\\$|\u20ac|\u00a3)\\d+(\\.\\d{2})?"
+    ],
+    "ml_detection": true
+  },
+  {
+    "video_id": "demo5",
+    "title": "Gaming setup reveal! RTX 4090 #shorts",
+    "description": "Finally got my hands on the RTX 4090! Building the ultimate gaming PC. Parts list in description.",
+    "url": "https://www.youtube.com/watch?v=demo5",
+    "regex_patterns": [
+      "bestbuy\\.com"
+    ],
+    "ml_detection": true
+  }
+]
