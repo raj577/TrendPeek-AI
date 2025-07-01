@@ -31,7 +31,7 @@ st.markdown("""
 <div class="footer-sticky">
     <div class="footer">
         <div>🤖 Developed with ❤️ by <b>Rajat Srivastav</b></div>
-        <div>💻 <a href="https://github.com/rajatsrivastav2212" target="_blank">GitHub</a></div>
+        <div>💻 <a href="https://github.com/raj577" target="_blank">GitHub</a></div>
     </div>
 </div>
 """, unsafe_allow_html=True)
