@@ -142,7 +142,7 @@ col1, col2 = st.columns([2, 1])
 
 with col1:
     st.header("⚙️ Search Settings")
-    query_input = st.text_area("Enter keywords (comma-separated):",  value="amazon finds, must have products, kitchen hacks, cool gadgets, "
+    query_input = st.text_area("Enter keywords (comma-separated):",  value="amazon finds, must have products, kitchen hacks, "
           "viral amazon products, best amazon products, useful home items"
     )
     
