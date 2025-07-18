@@ -5,27 +5,123 @@ from youtube_shorts_filter import YouTubeShortsProductFilter, API_KEY
 # ------------------- Page setup -------------------
 st.set_page_config(page_title="Finder AI – YouTube Shorts Product Filter", layout="wide")
 
-# ------------------- Sticky Header -------------------
+# ------------------- Mobile-Responsive Header -------------------
 st.markdown("""
 <style>
+/* Mobile-first responsive design */
 .footer-sticky {
-    position: sticky;
-    top: 0;
-    z-index: 999;
-    padding: 10px 0 5px 0;
+    position: relative;
+    padding: 8px 0;
     background: #0f172a;
+    margin-bottom: 10px;
 }
 .footer-sticky .footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 20px;
+    font-size: 16px;
     color: #94a3b8;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 .footer-sticky a {
     color: #38bdf8;
     font-weight: bold;
     text-decoration: none;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    .footer-sticky {
+        padding: 6px 0;
+    }
+    .footer-sticky .footer {
+        font-size: 14px;
+        flex-direction: column;
+        text-align: center;
+        gap: 4px;
+    }
+    .footer-sticky .footer > div {
+        width: 100%;
+    }
+}
+
+/* Ensure main content is visible on mobile */
+.main .block-container {
+    padding-top: 1rem;
+    max-width: 100%;
+}
+
+/* Mobile card adjustments */
+@media (max-width: 768px) {
+    .main .block-container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    /* Stack columns on mobile */
+    .row-widget.stColumns {
+        flex-direction: column !important;
+    }
+    
+    .row-widget.stColumns > div {
+        width: 100% !important;
+        margin-bottom: 10px;
+    }
+    
+    /* Adjust video cards for mobile */
+    .video-card {
+        margin-bottom: 20px !important;
+    }
+}
+
+/* Mobile sidebar handling - hide completely on mobile */
+@media (max-width: 768px) {
+    /* Hide sidebar completely on mobile */
+    section[data-testid="stSidebar"] {
+        display: none !important;
+    }
+    
+    /* Ensure main content takes full width */
+    .main .block-container {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        max-width: 100% !important;
+    }
+    
+    /* Mobile-friendly button styling */
+    .stButton > button {
+        width: 100%;
+        margin-top: 10px;
+    }
+    
+    /* Stack columns on mobile */
+    .row-widget.stColumns {
+        flex-direction: column !important;
+    }
+    
+    .row-widget.stColumns > div {
+        width: 100% !important;
+        margin-bottom: 15px;
+    }
+}
+
+/* Improve mobile text input */
+@media (max-width: 640px) {
+    .stTextArea textarea {
+        min-height: 100px !important;
+        font-size: 16px !important; /* Prevent zoom on iOS */
+    }
+    
+    .stSlider {
+        margin-bottom: 20px;
+    }
+    
+    /* Make buttons more touch-friendly */
+    .stButton > button {
+        min-height: 44px;
+        font-size: 16px;
+    }
 }
 </style>
 <div class="footer-sticky">
@@ -36,11 +132,31 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# ------------------- Sidebar: AI Description -------------------
-with st.sidebar:
-    st.header("🧠 How Finder AI Works")
-    st.markdown("""
-**Finder AI** is powered by a hybrid pipeline of:
+# ------------------- Main Content Area -------------------
+st.title("🎯 YouTube Shorts Product Filter")
+st.markdown("Find product mentions in YouTube Shorts using AI-powered detection")
+
+# ------------------- Mobile-First Layout -------------------
+# Create two columns: settings and info (on desktop), stack on mobile
+col1, col2 = st.columns([2, 1])
+
+with col1:
+    st.header("⚙️ Search Settings")
+    query_input = st.text_area("Enter keywords (comma-separated):",  value="amazon finds, must have products, kitchen hacks, cool gadgets, "
+          "viral amazon products, best amazon products, useful home items"
+    )
+    
+    col_a, col_b = st.columns([2, 1])
+    with col_a:
+        max_results = st.slider("🔍 Max results per query", min_value=5, max_value=50, value=5)
+    with col_b:
+        st.write("")  # Spacer
+        run_btn = st.button("🚀 Run Finder AI", type="primary")
+
+with col2:
+    with st.expander("🧠 How Finder AI Works", expanded=False):
+        st.markdown("""
+**Finder AI** uses a hybrid pipeline:
 
 - ✅ **TF‑IDF Vectorizer**: Converts text into feature vectors  
 - 🧠 **ML Classifier**: Predicts if a Short is product-related  
@@ -51,19 +167,24 @@ with st.sidebar:
 Built with love for data-driven YouTube discovery 🚀
 """)
 
-    # ------------------- Search Form -------------------
-    st.header("⚙️ Search Settings")
-    query_input = st.text_area("Enter keywords (comma-separated):",  value="amazon finds, must have products, kitchen hacks, cool gadgets, "
-          "viral amazon products, best amazon products, useful home items, "
-          # "amazon must haves, tech gadgets amazon, tiktok amazon products, "
-          # "cool stuff on amazon, unique amazon finds, amazon gift ideas, "
-          # "budget gadgets, amazon tools, affordable tech amazon, "
-          # "amazon electronics under 1000, amazon beauty products, "
-          # "home organization amazon, smart home gadgets, cheap amazon finds, "
-          # "mini gadgets amazon, best kitchen gadgets"
-    )
-    max_results = st.slider("🔍 Max results per query", min_value=5, max_value=50, value=5)
-    run_btn = st.button("🚀 Run Finder AI")
+# ------------------- Optional Sidebar for Desktop -------------------
+with st.sidebar:
+    st.markdown("### 💡 Tips")
+    st.markdown("""
+- Use specific product categories for better results
+- Try brand names like "apple", "samsung", "nike"
+- Include shopping terms like "review", "unboxing"
+- Separate keywords with commas
+""")
+    
+    st.markdown("### 📊 About")
+    st.markdown("""
+This tool combines regex patterns with machine learning to identify product mentions in YouTube Shorts.
+""")
+    
+    st.markdown("---")
+    st.markdown("🤖 **Developed by Rajat Srivastav**")
+    st.markdown("[GitHub](https://github.com/raj577)")
 
 # ------------------- Run Filter -------------------
 if run_btn:
@@ -78,10 +199,10 @@ if run_btn:
 
     st.success(f"✅ Found {len(results)} relevant Shorts.")
 
-    # ------------------ Display cards in rows of 3 ------------------
+    # ------------------ Display cards in responsive grid ------------------
     for i in range(0, len(results), 3):
-        cols = st.columns(3)
-        for col, short in zip(cols, results[i:i+3]):
+        cols = st.columns([1, 1, 1])  # Equal width columns
+        for col_idx, short in enumerate(results[i:i+3]):
             video_id = short["video_id"]
             title = short["title"]
             url = short["url"]
@@ -107,17 +228,23 @@ if run_btn:
                                   display:inline-block;">
                                   🤖 ML Model</span>"""
 
-            with col:
+            with cols[col_idx]:
                 st.markdown(f"""
-                    <div style="background-color:#1e293b;padding:10px;border-radius:10px;">
+                    <div class="video-card" style="
+                        background-color:#1e293b;
+                        padding:10px;
+                        border-radius:10px;
+                        margin-bottom:15px;
+                        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                    ">
                         <a href="{url}" target="_blank">
-                            <img src="{thumb}" width="100%" style="border-radius:8px;">
+                            <img src="{thumb}" width="100%" style="border-radius:8px; display:block;">
                         </a>
                         <a href="{url}" target="_blank" style="text-decoration:none;">
-                            <h5 style="margin:4px 0; font-size:16px; color:#f1f5f9;">{title}</h5>
+                            <h5 style="margin:8px 0 4px 0; font-size:16px; color:#f1f5f9; line-height:1.3;">{title}</h5>
                         </a>
                         <div style="margin:6px 0;">{badge_html}</div>
-                        <p style="margin:6px 0 0 0; font-size:13px; color:#cbd5e1;">
+                        <p style="margin:6px 0 0 0; font-size:13px; color:#cbd5e1; line-height:1.4;">
                             {desc}
                         </p>
                     </div>
