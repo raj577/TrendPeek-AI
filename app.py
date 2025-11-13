@@ -183,8 +183,8 @@ This tool combines regex patterns with machine learning to identify product ment
 """)
     
     st.markdown("---")
-    st.markdown("🤖 **Developed by Rajat Srivastav**")
-    st.markdown("[GitHub](https://github.com/raj577)")
+    # st.markdown("🤖 **Developed by Rajat Srivastav**")
+    # st.markdown("[GitHub](https://github.com/raj577)")
 
 # ------------------- Run Filter -------------------
 if run_btn:
