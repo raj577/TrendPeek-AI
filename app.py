@@ -124,12 +124,7 @@ st.markdown("""
     }
 }
 </style>
-# <div class="footer-sticky">
-#     <div class="footer">
-#         <div>🤖 Developed with ❤️ by <b>Rajat Srivastav</b></div>
-#         <div>💻 <a href="https://github.com/raj577" target="_blank">GitHub</a></div>
-#     </div>
-# </div>
+
 """, unsafe_allow_html=True)
 
 # ------------------- Main Content Area -------------------
